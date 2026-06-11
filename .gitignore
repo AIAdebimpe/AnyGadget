@@ -1,0 +1,10 @@
+# Master Dependency Folders
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Local Environment Variables and System Logs
+.env
+*.log
+.DS_Store
+dist/
