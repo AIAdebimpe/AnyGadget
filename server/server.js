@@ -13,8 +13,23 @@ const app = express();
 // ==========================================
 
 // Enable CORS so our React frontend (running on a different port) can talk to our API
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+    'http://localhost:5176'
+];
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173', // Vite's default local port
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like Postman, cURL, or mobile apps)
+        // or check if the browser's origin is inside our approved array
+        if (!origin || allowedOrigins.includes(origin) || origin === process.env.CLIENT_URL) {
+            callback(null, true);
+        } else {
+            callback(new Error('Blocked by AnyGadget CORS Security Policy'));
+        }
+    },
     credentials: true
 }));
 
