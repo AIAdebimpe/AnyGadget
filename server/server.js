@@ -44,11 +44,12 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Import the Auth Router mapping
-const authRoutes = require('./routes/authRoutes');
 
-// Mount the authentication routing tracks to our express app
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const productRoutes = require('./routes/productRoutes');
+app.use('/api/products', productRoutes);
 
 // ==========================================
 // 🚀 SERVER INITIALIZATION
